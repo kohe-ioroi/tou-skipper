@@ -9,6 +9,8 @@
 ![image](https://user-images.githubusercontent.com/25764819/165962664-5fc3d4b3-33d1-4721-abb7-b95322309722.png)  
 ③カメラとポップアップを許可する(ポップアップを許可しない場合、進捗が正しく取得できません)  
 ![image](https://user-images.githubusercontent.com/25764819/165962849-ea9a4f15-e6c5-4e02-98e3-fcc9d7aecec7.png)
+# インストール
+[ここからDL](https://github.com/kohe-ioroi/tou-skipper/raw/main/TOU-Skipper.user.js)
 # 主な機能
 ## トップ画面
 各授業の進捗率を取得・表示することができます  
