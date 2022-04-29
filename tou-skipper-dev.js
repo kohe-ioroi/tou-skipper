@@ -19,10 +19,10 @@ var 回答 = {};
     setTimeout(()=>{
         toumsg("DBチェック...");
         if(localStorage.getItem("授業回答情報")==null){
-            localStorage.setItem("授業回答情報",JSON.stringify({}));
+            localStorage.setItem("授業回答情報",JSON.stringify({}));//DBの新規構築
             toumsg("新規構築を行いました");
         }else{
-            回答 = JSON.parse(localStorage.getItem("授業回答情報"));
+            回答 = JSON.parse(localStorage.getItem("授業回答情報"));//DBを接続
             toumsg("既存接続を行いました");
         }
         toumsg("回答を受信・統合します...");
@@ -82,21 +82,21 @@ function 動画開始(){
     }
 }
 function ページ移動判定(){
-    if(document.querySelector(".loading-outer").style.display != "none"){
+    if(document.querySelector(".loading-outer").style.display != "none"){//画面が読み込み待ちの場合
         loadcounter = 0;
         setTimeout(()=>{ページ移動判定()},500);
-    }else if(loadcounter < 5){
+    }else if(loadcounter < 5){//読み込み完了したがロードカウンターが既定値以下の場合
         loadcounter ++;
         setTimeout(()=>{ページ移動判定()},100);
     }
-    else{
+    else{//読み込み完了が確定した場合
         loadcounter = 0;
         if (new RegExp("^#/courses/[0-9]{4}/sections/[0-9]{5}/lectures/[0-9]{6}/materials/[0-9]{6}$").test(location.hash)){//記述式ページ
             記述貼り付け();
         }else if (new RegExp("^#/courses/[0-9]{4}/sections/[0-9]{5}/lectures/[0-9]{6}/materials/[0-9]{4,5}$").test(location.hash)){//小テストページ
-            document.querySelector("div.indent.mt25").querySelectorAll("input").forEach((x)=>{x.onchange = ()=>{
+            document.querySelector("div.indent.mt25").querySelectorAll("input").forEach((x)=>{x.onchange = ()=>{//全てのinput要素に対し、変更された時
                 let 処理アレイ = Array();
-                switch(document.querySelector("input").type){
+                switch(document.querySelector("input").type){//要素のタイプで変更
                     case "checkbox":
                         document.querySelector("div.indent.mt25").querySelectorAll("input").forEach((y)=>{if(y.checked == true){処理アレイ.push(y.value)}});
                         break;
@@ -111,7 +111,7 @@ function ページ移動判定(){
                 }
                 var 対象ID = location.href.slice(location.href.indexOf("/materials/")+11);
                 回答[対象ID]=JSON.stringify(処理アレイ);
-                localStorage.setItem("授業回答情報",JSON.stringify(回答));
+                localStorage.setItem("授業回答情報",JSON.stringify(回答));//
                 toumsg("ID:"+対象ID+"の次の回答が記録されました。\n"+回答[対象ID]+"");
             }});
             if(localStorage.getItem("授業回答情報") == null){
