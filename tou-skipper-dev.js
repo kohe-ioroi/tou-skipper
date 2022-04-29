@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TOU-Skipper
 // @namespace    https://www.ioroi.org
-// @version      1.0
+// @version      1.01
 // @description  レポートらくらくツール
 // @author       Kouhei Ioroi
 // @match        https://room.internet.ac.jp/
@@ -61,9 +61,15 @@ function 動画開始(){
     const video_tag = document.querySelector("video");//映像要素を取得
     if(video_tag != null){//要素が存在するならば
         if(video_tag.id != "faceMonitor"){//要素が顔確認画面でない場合
-            console.log("オートプレイ開始");
+            toumsg("再生開始")
+            let volumes
+            if(localStorage.getItem("音量設定") == null){
+                volumes = 0.5;
+            }else{
+                volumes = Number(localStorage.getItem("音量設定"));
+            }
             video_tag.play();//動画を再生開始
-            video_tag.volume = 0;//音量をゼロにする
+            video_tag.volume = volumes;//音量をゼロにする
             video_tag.onended = ()=>{setTimeout(再生終了(),3000)};//再生終了時に発火する再生終了イベントを設置
             video_tag.ontimeupdate = ()=>{//動画が再生しつづけると
                 var 現在時間 = video_tag.currentTime;
@@ -78,6 +84,9 @@ function 動画開始(){
                 }
                 document.title = "完了率:"+ 進捗率 + "%/ETA:" + ETA;
             }//再生中は再生完了率を更新して表示する
+            video_tag.onvolumechange = ()=>{
+                localStorage.setItem("音量設定",video_tag.volume);
+            }
         }
     }
 }
