@@ -1,2 +1,2 @@
 # tou-skipper
-Tokyo Online University's LMS Support Tool.
+東京通信大学のLMSシステム @ROOM の学習補助ユーザースクリプトです。
