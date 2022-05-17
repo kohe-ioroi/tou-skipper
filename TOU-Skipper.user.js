@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TOU-Skipper
 // @namespace    https://www.ioroi.org
-// @version      1.1
+// @version      1.2
 // @description  レポートらくらくツール
 // @author       Kouhei Ioroi
 // @match        https://room.internet.ac.jp/
